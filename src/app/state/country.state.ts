@@ -10,7 +10,7 @@ export interface CountryState {
   error: string | null;
 }
 
-export const initialCountryState: CountryState = {
+export const initialState: CountryState = {
   countries: [],
   selectedCountry: null,
   searchQuery: '',

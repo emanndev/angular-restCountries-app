@@ -37,7 +37,7 @@ export const loadCountryByCodeFailure = createAction(
 // This action is dispatched to select a country
 export const selectCountry = createAction(
   '[Country] Select Country',
-  props<{ country: Country }>()
+  props<{ code: string }>()
 );
 
 // This action is dispatched to search for countries based on a query

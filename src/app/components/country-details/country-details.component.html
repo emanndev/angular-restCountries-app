@@ -2,23 +2,28 @@
   <button (click)="goBack()">Back</button>
   <div *ngIf="loading$ | async">Loading...</div>
   <div *ngIf="error$ | async as error">{{ error }}</div>
+  
   <div *ngIf="country$ | async as country">
     <h2>{{ country.name.common }}</h2>
     <img [src]="country.flags.png" [alt]="country.flags.alt" width="100" />
     <p>Capital: {{ country.capital.join(", ") }}</p>
     <p>Region: {{ country.region }}</p>
     <p>Population: {{ country.population | population }}</p>
-    <p *ngIf="country.currencies">
-      Currencies: {{ country.currencies | objectList : "currencies" }}
-    </p>
-    <p *ngIf="country.languages">
-      Languages: {{ country.languages | objectList : "languages" }}
-    </p>
-    <p *ngIf="country.borders.length">
-      Borders:
-      <span *ngFor="let border of country.borders">
-        <a (click)="selectBorderCountry(border)">{{ border }}</a>
+
+    @if(country.currencies){
+    <p>Currencies: {{ country.currencies | objectList : "currencies" }}</p>
+    } @if(country.languages){
+    <p>Languages: {{ country.languages | objectList : "languages" }}</p>
+    } @if(borderCountries.length){
+    <p>
+      Borders: @for(border of borderCountries; track $index){
+      <span>
+        <a (click)="selectBorderCountry(border.code)">
+          {{ border.name }}
+        </a>
       </span>
+      }
     </p>
+    }
   </div>
 </div>

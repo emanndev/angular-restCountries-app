@@ -1,5 +1,6 @@
 export interface Country {
   name: {
+    [x: string]: any;
     common: string;
     official: string;
     nativeName?: {

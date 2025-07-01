@@ -17,11 +17,10 @@ import {
   selectLoading,
 } from '../../store/country.selectors';
 
-
 @Component({
   selector: 'app-country-list',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule],
   templateUrl: './country-list.component.html',
   styleUrl: './country-list.component.scss',
 })
@@ -31,13 +30,7 @@ export class CountryListComponent implements OnInit {
   error$: Observable<string | null>;
   searchQuery: string = '';
   filterRegion: string = '';
-  regions: string[] = [
-    'Africa',
-    'Americas',
-    'Asia',
-    'Europe',
-    'Oceania'
-  ];
+  regions: string[] = ['Africa', 'Americas', 'Asia', 'Europe', 'Oceania'];
 
   constructor(private store: Store, private router: Router) {
     this.countries$ = this.store.select(selectFilteredCountries);
@@ -46,10 +39,10 @@ export class CountryListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      this.store.dispatch(loadCountries());
+    this.store.dispatch(loadCountries());
   }
 
-  onSearch(){
+  onSearch() {
     this.store.dispatch(setSearchQuery({ query: this.searchQuery }));
   }
 

@@ -1,1 +1,31 @@
-<p>country-list works!</p>
+<div>
+  <input
+    type="text"
+    [(ngModel)]="searchQuery"
+    (input)="onSearch()"
+    placeholder="Search for a country..."
+  />
+
+  <select
+    name="region"
+    [(ngModel)]="filterRegion"
+    (change)="onFilterRegion(filterRegion)"
+  >
+    <option value="">Filter By Region</option>
+    <option *ngFor="let region of regions" [value]="region">
+      {{ region }}
+    </option>
+  </select>
+  <div *ngIf="loading$ | async">Loading...</div>
+  <div *ngIf="error$ | async">{{ error$ | async }}</div>
+
+  <ul>
+    <li
+      *ngFor="let country of countries$ | async"
+      (click)="selectCountry(country)"
+    >
+      <img [src]="country.flags.png" [alt]="country.flags.alt" width="50" />
+      {{ country.name.common }} - ({{ country.region }})
+    </li>
+  </ul>
+</div>

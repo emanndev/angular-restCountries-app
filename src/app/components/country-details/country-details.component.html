@@ -17,9 +17,6 @@
     Back
   </button>
 
-  <div *ngIf="loading$ | async" class="loading">Loading...</div>
-  <div *ngIf="error$ | async as error" class="error">{{ error }}</div>
-
   <div *ngIf="country$ | async as country" class="country-content">
     <div class="flag-section">
       <img

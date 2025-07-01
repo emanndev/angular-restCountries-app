@@ -12,7 +12,7 @@ export const selectFilteredCountries = createSelector(
     if (state.searchQuery) {
       const query = state.searchQuery.toLowerCase();
       filtered = filtered.filter((country) =>
-        country.name['toLowerCase']().includes(query)
+        country.name.common.toLowerCase().includes(query)
       );
     }
     if (state.filterRegion) {

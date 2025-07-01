@@ -1,29 +1,85 @@
-<div>
-  <button (click)="goBack()">Back</button>
-  <div *ngIf="loading$ | async">Loading...</div>
-  <div *ngIf="error$ | async as error">{{ error }}</div>
-  
-  <div *ngIf="country$ | async as country">
-    <h2>{{ country.name.common }}</h2>
-    <img [src]="country.flags.png" [alt]="country.flags.alt" width="100" />
-    <p>Capital: {{ country.capital.join(", ") }}</p>
-    <p>Region: {{ country.region }}</p>
-    <p>Population: {{ country.population | population }}</p>
+<div class="country-details-container">
+  <button (click)="goBack()" class="back-button">
+    <svg
+      width="20"
+      height="20"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M10 19l-7-7m0 0l7-7m-7 7h18"
+      />
+    </svg>
+    Back
+  </button>
 
-    @if(country.currencies){
-    <p>Currencies: {{ country.currencies | objectList : "currencies" }}</p>
-    } @if(country.languages){
-    <p>Languages: {{ country.languages | objectList : "languages" }}</p>
-    } @if(borderCountries.length){
-    <p>
-      Borders: @for(border of borderCountries; track $index){
-      <span>
-        <a (click)="selectBorderCountry(border.code)">
-          {{ border.name }}
-        </a>
-      </span>
+  <div *ngIf="loading$ | async" class="loading">Loading...</div>
+  <div *ngIf="error$ | async as error" class="error">{{ error }}</div>
+
+  <div *ngIf="country$ | async as country" class="country-content">
+    <div class="flag-section">
+      <img
+        [src]="country.flags.png"
+        [alt]="country.flags.alt"
+        class="country-flag"
+      />
+    </div>
+
+    <div class="info-section">
+      <h1 class="country-title">{{ country.name.common }}</h1>
+
+      <div class="details-grid">
+        <div class="details-left">
+          <p>
+            <span class="label">Native Name:</span> {{ country.name.official }}
+          </p>
+          <p>
+            <span class="label">Population:</span>
+            {{ country.population | population }}
+          </p>
+          <p><span class="label">Region:</span> {{ country.region }}</p>
+          <p><span class="label">Sub Region:</span> {{ country.subregion }}</p>
+          <p>
+            <span class="label">Capital:</span>
+            {{ country.capital.join(", ") || "N/A" }}
+          </p>
+        </div>
+
+        <div class="details-right">
+          <p>
+            <span class="label">Top Level Domain:</span>
+            {{ country.tld?.join(", ") || "N/A" }}
+          </p>
+          @if(country.currencies) {
+          <p>
+            <span class="label">Currencies:</span>
+            {{ country.currencies | objectList : "currencies" }}
+          </p>
+          } @if(country.languages) {
+          <p>
+            <span class="label">Languages:</span>
+            {{ country.languages | objectList : "languages" }}
+          </p>
+          }
+        </div>
+      </div>
+
+      @if(borderCountries.length) {
+      <div class="border-countries">
+        <span class="label">Border Countries:</span>
+        <div class="border-tags">
+          @for(border of borderCountries; track $index) {
+          <button class="border-tag" (click)="selectBorderCountry(border.code)">
+            {{ border.name }}
+          </button>
+          }
+        </div>
+      </div>
       }
-    </p>
-    }
+    </div>
   </div>
 </div>

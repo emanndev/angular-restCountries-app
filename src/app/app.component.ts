@@ -5,7 +5,7 @@ import { ThemeSwitcherComponent } from './components/theme-switcher/theme-switch
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, ThemeSwitcherComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

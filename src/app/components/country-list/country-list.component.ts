@@ -54,6 +54,6 @@ export class CountryListComponent implements OnInit {
 
   selectCountry(country: Country) {
     this.store.dispatch(selectCountry({ code: country.cca3 }));
-    this.router.navigate(['/country', country.cca3]);
+    this.router.navigate(['/countries', country.cca3]);
   }
 }

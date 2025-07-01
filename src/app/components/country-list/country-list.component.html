@@ -1,25 +1,65 @@
-<div>
-  <input
-    type="text"
-    [(ngModel)]="searchQuery"
-    (input)="onSearch()"
-    placeholder="Search for a country..."
-  />
-  <select [(ngModel)]="filterRegion" (change)="onFilterRegion(filterRegion)">
-    <option value="">All Regions</option>
-    <option *ngFor="let region of regions" [value]="region">
-      {{ region }}
-    </option>
-  </select>
-  <div *ngIf="loading$ | async">Loading...</div>
-  <div *ngIf="error$ | async as error">{{ error }}</div>
-  <ul>
-    @for( country of countries$ | async; track $index) {
-    <li (click)="selectCountry(country)">
-      <img [src]="country.flags.png" [alt]="country.flags.alt" width="50" />
-      {{ country.name.common }} ({{ country.region }}) - Population:
-      {{ country.population | population }}
-    </li>
+<div class="country-list-container">
+  <div class="search-filter-container">
+    <div class="search-wrapper">
+      <svg
+        class="search-icon"
+        width="16"
+        height="16"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <circle cx="11" cy="11" r="8"></circle>
+        <path d="m21 21-4.35-4.35"></path>
+      </svg>
+      <input
+        type="text"
+        class="search-input"
+        [(ngModel)]="searchQuery"
+        (input)="onSearch()"
+        placeholder="Search for a country..."
+      />
+    </div>
+    <select
+      [(ngModel)]="filterRegion"
+      (change)="onFilterRegion(filterRegion)"
+      class="filter-select"
+    >
+      <option value="">Filter by Region</option>
+      <option *ngFor="let region of regions" [value]="region">
+        {{ region }}
+      </option>
+    </select>
+  </div>
+
+  <div *ngIf="loading$ | async" class="loading">Loading...</div>
+  <div *ngIf="error$ | async as error" class="error">{{ error }}</div>
+
+  <div class="countries-grid">
+    @for(country of countries$ | async; track $index) {
+    <div class="country-card" (click)="selectCountry(country)">
+      <div class="flag-container">
+        <img
+          [src]="country.flags.png"
+          [alt]="country.flags.alt"
+          class="flag-image"
+        />
+      </div>
+      <div class="country-info">
+        <h3 class="country-name">{{ country.name.common }}</h3>
+        <div class="country-details">
+          <p>
+            <span class="label">Population:</span>
+            {{ country.population | population }}
+          </p>
+          <p><span class="label">Region:</span> {{ country.region }}</p>
+          <p>
+            <span class="label">Capital:</span>
+            {{ country.capital.join(", ") || "N/A" }}
+          </p>
+        </div>
+      </div>
+    </div>
     }
-  </ul>
+  </div>
 </div>

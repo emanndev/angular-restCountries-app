@@ -1,15 +1,31 @@
-:root {
-  --bg-color: #ffffff;
-  --text-color: #000000;
+//use Nunito Sans font from Google Fonts
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+:root {
+  --bg-color: #fafafa;
+  --element-bg: #ffffff;
+  --text-color: #111517;
+  --input-color: #858585;
+  --shadow: 0 2px 9px rgba(0, 0, 0, 0.05);
+}
+
+/* Dark Theme */
 [data-theme="dark"] {
   --bg-color: #202c37;
+  --element-bg: #2b3945;
   --text-color: #ffffff;
+  --input-color: #ffffff;
+  --shadow: 0 2px 9px rgba(0, 0, 0, 0.3);
 }
 
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
-  font-family: "Arial", sans-serif;
+  min-height: 100vh;
 }

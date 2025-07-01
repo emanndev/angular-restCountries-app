@@ -1,0 +1,58 @@
+.country-list-container {
+  padding: 0 80px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.search-filter-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 48px;
+  gap: 20px;
+}
+
+.search-wrapper {
+  position: relative;
+  flex: 1;
+  max-width: 480px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 32px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--input-color);
+  width: 18px;
+  height: 18px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 18px 32px 18px 74px;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--element-bg);
+  color: var(--text-color);
+  font-size: 14px;
+  box-shadow: var(--shadow);
+  outline: none;
+}
+
+.search-input::placeholder {
+  color: var(--input-color);
+}
+
+.filter-select {
+  padding: 18px 24px;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--element-bg);
+  color: var(--text-color);
+  font-size: 14px;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  outline: none;
+  min-width: 200px;
+}

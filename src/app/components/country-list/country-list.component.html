@@ -14,12 +14,12 @@
   <div *ngIf="loading$ | async">Loading...</div>
   <div *ngIf="error$ | async as error">{{ error }}</div>
   <ul>
-    <li
-      *ngFor="let country of countries$ | async"
-      (click)="selectCountry(country)"
-    >
+    @for( country of countries$ | async; track $index) {
+    <li (click)="selectCountry(country)">
       <img [src]="country.flags.png" [alt]="country.flags.alt" width="50" />
-      {{ country.name.common }} ({{ country.region }})
+      {{ country.name.common }} ({{ country.region }}) - Population:
+      {{ country.population | population }}
     </li>
+    }
   </ul>
 </div>

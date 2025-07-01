@@ -8,7 +8,7 @@ import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root',
 })
-export class CountryApiServiceService {
+export class CountryApiService {
   private readonly apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}

@@ -1,22 +1,20 @@
-import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { of } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
-import { CountryApiServiceService } from '../services/country-api-service.service';
+import { Injectable, inject } from '@angular/core';
+import { createEffect, Actions, ofType } from '@ngrx/effects';
+import { catchError, map, mergeMap, of } from 'rxjs';
+import { CountryApiService } from '../services/country-api.service';
 import * as CountryActions from './country.actions';
 
 @Injectable()
 export class CountryEffects {
-  constructor(
-    private actions$: Actions,
-    private countryApiService: CountryApiServiceService
-  ) {}
+  private actions$ = inject(Actions);
+  private countryApi = inject(CountryApiService);
 
+  //  Load all countries
   loadCountries$ = createEffect(() =>
     this.actions$.pipe(
       ofType(CountryActions.loadCountries),
-      switchMap(() =>
-        this.countryApiService.getAllCountries().pipe(
+      mergeMap(() =>
+        this.countryApi.getAllCountries().pipe(
           map((countries) =>
             CountryActions.loadCountriesSuccess({ countries })
           ),
@@ -28,19 +26,24 @@ export class CountryEffects {
     )
   );
 
-    loadCountryByCode$ = createEffect(() =>
-        this.actions$.pipe(
-        ofType(CountryActions.loadCountryByCode),
-        switchMap(({ code }) =>
-            this.countryApiService.getCountryByCode(code).pipe(
-            map((country) =>
-                CountryActions.loadCountryByCodeSuccess({ country })
-            ),
-            catchError((error) =>
-                of(CountryActions.loadCountryByCodeFailure({ error: error.message }))
+  // Load country by code
+  loadCountryByCode$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CountryActions.loadCountryByCode),
+      mergeMap(({ code }) =>
+        this.countryApi.getCountryByCode(code).pipe(
+          map((country) =>
+            CountryActions.loadCountryByCodeSuccess({ country })
+          ),
+          catchError((error) =>
+            of(
+              CountryActions.loadCountryByCodeFailure({
+                error: error.message,
+              })
             )
-            )
+          )
         )
-        )
-    );
+      )
+    )
+  );
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, take } from 'rxjs';
 import { setTheme } from '../../store/country.actions';
 import { selectTheme } from '../../store/country.selectors';
 
@@ -26,11 +26,9 @@ export class ThemeSwitcherComponent implements OnInit {
   }
 
   toggleTheme() {
-    this.theme$
-      .subscribe((currentTheme) => {
-        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-        this.store.dispatch(setTheme({ theme: newTheme }));
-      })
-      .unsubscribe();
+    this.theme$.pipe(take(1)).subscribe((currentTheme) => {
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      this.store.dispatch(setTheme({ theme: newTheme }));
+    });
   }
 }

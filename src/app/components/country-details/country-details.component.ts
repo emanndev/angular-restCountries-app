@@ -17,7 +17,7 @@ import {
 @Component({
   selector: 'app-country-details',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule],
   templateUrl: './country-details.component.html',
   styleUrls: ['./country-details.component.scss'],
 })

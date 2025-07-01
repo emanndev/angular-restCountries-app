@@ -1,11 +1,36 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { setTheme } from '../../store/country.actions';
+import { selectTheme } from '../../store/country.selectors';
 
 @Component({
   selector: 'app-theme-switcher',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './theme-switcher.component.html',
-  styleUrl: './theme-switcher.component.scss'
+  styleUrls: ['./theme-switcher.component.scss'],
 })
-export class ThemeSwitcherComponent {
+export class ThemeSwitcherComponent implements OnInit {
+  theme$: Observable<'light' | 'dark'>;
 
+  constructor(private store: Store) {
+    this.theme$ = this.store.select(selectTheme);
+  }
+
+  ngOnInit() {
+    this.theme$.subscribe((theme) => {
+      document.body.setAttribute('data-theme', theme);
+    });
+  }
+
+  toggleTheme() {
+    this.theme$
+      .subscribe((currentTheme) => {
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        this.store.dispatch(setTheme({ theme: newTheme }));
+      })
+      .unsubscribe();
+  }
 }

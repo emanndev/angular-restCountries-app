@@ -1,1 +1,3 @@
-<p>theme-switcher works!</p>
+<button (click)="toggleTheme()">
+  Switch to {{ (theme$ | async) === "light" ? "Dark" : "Light" }} Mode
+</button>

@@ -16,7 +16,6 @@ import {
   selectError,
   selectLoading,
 } from '../../store/country.selectors';
-import { PopulationPipe } from '../../pipes/population.pipe';
 import { CountryCardComponent } from '../country-card/country-card.component';
 
 @Component({
@@ -55,10 +54,5 @@ export class CountryListComponent implements OnInit {
   onFilterRegion(region: string) {
     this.filterRegion = region;
     this.store.dispatch(setFilterRegion({ region }));
-  }
-
-  selectCountry(country: Country) {
-    this.store.dispatch(selectCountry({ code: country.cca3 }));
-    this.router.navigate(['/countries', country.cca3]);
   }
 }

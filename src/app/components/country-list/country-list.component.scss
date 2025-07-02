@@ -23,7 +23,7 @@
   left: 32px;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--input-color);
+  color: black;
   width: 18px;
   height: 18px;
 }
@@ -88,14 +88,14 @@
   }
 
   .search-input {
-    padding: 16px 32px 16px 74px;
+    padding: 16px 93px;
     font-size: 14px;
   }
 
   .filter-select {
-    padding: 16px 24px;
+    padding: 16px 20px;
     width: 100%;
-    max-width: 320px;
+    max-width: 200px;
     width: 50%;
     align-self: flex-start;
   }

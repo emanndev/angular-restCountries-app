@@ -13,6 +13,7 @@ import {
 import { PopulationPipe } from '../../pipes/population.pipe';
 import { ObjectListPipe } from '../../pipes/object-list.pipe';
 import { CountryApiService } from '../../services/country-api.service';
+import { map, distinctUntilChanged, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-country-details',
@@ -39,14 +40,18 @@ export class CountryDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.params.subscribe((params) => {
-      const code = params['code'];
-      if (code) {
-        this.store.dispatch(loadCountryByCode({ code }));
-      }
-    });
+    this.route.paramMap
+      .pipe(
+        map((params) => params.get('code')),
+        distinctUntilChanged()
+      )
+      .subscribe((code) => {
+        if (code) {
+          this.store.dispatch(loadCountryByCode({ code }));
+        }
+      });
 
-    // Subscribe to selected country and get border names
+    // Get border countries
     this.country$.subscribe((country) => {
       if (country?.borders?.length) {
         this.countryApi
@@ -68,7 +73,6 @@ export class CountryDetailsComponent implements OnInit {
   }
 
   selectBorderCountry(code: string) {
-    this.store.dispatch(loadCountryByCode({ code }));
     this.router.navigate(['/countries', code]);
   }
 }

@@ -15,7 +15,9 @@ import {
   selectFilteredCountries,
   selectError,
   selectLoading,
+  selectHasCountries,
 } from '../../store/country.selectors';
+import { PopulationPipe } from '../../pipes/population.pipe';
 import { CountryCardComponent } from '../country-card/country-card.component';
 
 @Component({
@@ -40,9 +42,12 @@ export class CountryListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(loadCountries());
+    this.store.select(selectHasCountries).subscribe((hasCountries) => {
+      if (!hasCountries) {
+        this.store.dispatch(loadCountries());
+      }
+    });
 
-    // Reset filters after load
     this.store.dispatch(setSearchQuery({ query: '' }));
     this.store.dispatch(setFilterRegion({ region: '' }));
   }

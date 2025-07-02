@@ -32,8 +32,12 @@
     </select>
   </div>
 
-  <div *ngIf="loading$ | async" class="loading-spinner-container">
+  <div
+    *ngIf="(loading$ | async) && !(countries$ | async)?.length"
+    class="loading-spinner-container"
+  >
     <div class="spinner"></div>
   </div>
+
   <app-country-card></app-country-card>
 </div>

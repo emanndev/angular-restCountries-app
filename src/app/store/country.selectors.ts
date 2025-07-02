@@ -63,3 +63,8 @@ export const selectError = createSelector(
   selectedCountryState,
   (state) => state.error
 );
+
+export const selectHasCountries = createSelector(
+  selectedCountryState,
+  (state) => state.countries.length > 0
+);

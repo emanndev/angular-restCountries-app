@@ -16,19 +16,20 @@ import { PopulationPipe } from '../../pipes/population.pipe';
   templateUrl: './country-card.component.html',
   styleUrl: './country-card.component.scss',
 })
-export class CountryCardComponent implements OnInit {
+export class CountryCardComponent {
   countries$: Observable<Country[]>;
+  loading$: Observable<boolean>;
 
   constructor(private store: Store, private router: Router) {
     this.countries$ = this.store.select(selectFilteredCountries);
-  }
-
-  ngOnInit(): void {
-    this.store.dispatch(loadCountries());
+    this.loading$ = this.store.select(selectLoading);
   }
 
   selectCountry(country: Country) {
     this.store.dispatch(selectCountry({ code: country.cca3 }));
     this.router.navigate(['/countries', country.cca3]);
   }
+}
+function selectLoading(state: object): boolean {
+  throw new Error('Function not implemented.');
 }

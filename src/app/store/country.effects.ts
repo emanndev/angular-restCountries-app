@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { catchError, map, mergeMap, of, tap } from 'rxjs';
+import { catchError, delay, map, mergeMap, of } from 'rxjs';
 import { CountryApiService } from '../services/country-api.service';
 import * as CountryActions from './country.actions';
 
@@ -15,6 +15,7 @@ export class CountryEffects {
       ofType(CountryActions.loadCountries),
       mergeMap(() =>
         this.countryApi.getAllCountries().pipe(
+          delay(1000),
           map((countries) => {
             return CountryActions.loadCountriesSuccess({ countries });
           }),

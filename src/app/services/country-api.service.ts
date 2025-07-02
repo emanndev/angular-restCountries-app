@@ -14,7 +14,7 @@ export class CountryApiService {
   constructor(private http: HttpClient) {}
   getAllCountries(): Observable<Country[]> {
     const fields =
-      'name,cca3,capital,region,population,flags,borders,subregion,tld,languages'; 
+      'name,cca3,capital,region,population,flags,borders,subregion,tld,languages';
 
     return this.http.get<any[]>(`${this.apiUrl}/all?fields=${fields}`).pipe(
       map((data) =>
@@ -34,7 +34,7 @@ export class CountryApiService {
             borders: item.borders || [],
             subregion: item.subregion,
             tld: item.tld,
-            currencies: item.currencies, 
+            currencies: item.currencies,
             languages: item.languages,
           }))
       ),
@@ -69,8 +69,18 @@ export class CountryApiService {
     return this.http
       .get<any[]>(`${this.apiUrl}/alpha?codes=${codes.join(',')}`)
       .pipe(
-        map((data) =>
-          data.map((item) => ({
+        map((data) => {
+          const validData = data.filter(
+            (item) => item?.name?.common && item?.cca3
+          );
+          const invalidData = data.filter(
+            (item) => !item?.name?.common || !item?.cca3
+          );
+          if (invalidData.length) {
+            console.warn('Invalid country entries found:', invalidData);
+          }
+
+          return validData.map((item) => ({
             name: {
               common: item.name.common,
               official: item.name.official,
@@ -86,8 +96,8 @@ export class CountryApiService {
             tld: item.tld,
             currencies: item.currencies,
             languages: item.languages,
-          }))
-        ),
+          }));
+        }),
         catchError(this.handleError)
       );
   }

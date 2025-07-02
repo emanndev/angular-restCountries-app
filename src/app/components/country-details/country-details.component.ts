@@ -13,7 +13,7 @@ import {
 import { PopulationPipe } from '../../pipes/population.pipe';
 import { ObjectListPipe } from '../../pipes/object-list.pipe';
 import { CountryApiService } from '../../services/country-api.service';
-import { map, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { map, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-country-details',

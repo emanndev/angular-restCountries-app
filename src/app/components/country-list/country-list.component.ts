@@ -17,11 +17,12 @@ import {
   selectLoading,
 } from '../../store/country.selectors';
 import { PopulationPipe } from '../../pipes/population.pipe';
+import { CountryCardComponent } from '../country-card/country-card.component';
 
 @Component({
   selector: 'app-country-list',
   standalone: true,
-  imports: [CommonModule, FormsModule, PopulationPipe],
+  imports: [CommonModule, FormsModule, CountryCardComponent],
   templateUrl: './country-list.component.html',
   styleUrl: './country-list.component.scss',
 })

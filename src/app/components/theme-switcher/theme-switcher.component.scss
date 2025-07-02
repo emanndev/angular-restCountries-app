@@ -6,9 +6,6 @@
   background-color: var(--element-bg);
   box-shadow: var(--shadow);
   margin-bottom: 16px;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
 }
 
 .navbar-title {
@@ -43,4 +40,21 @@
 .theme-icon {
   width: 20px;
   height: 20px;
+}
+
+@media (max-width: 1200px) {
+  .navbar-container {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-container {
+    padding: 30px 16px;
+  }
+
+  .navbar-title {
+    font-size: 20px;
+  }
 }

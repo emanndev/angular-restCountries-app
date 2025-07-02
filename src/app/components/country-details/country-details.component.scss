@@ -104,3 +104,62 @@
 .border-tag:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
+
+@media (max-width: 768px) {
+  .back-button {
+    padding: 12px 40px;
+    margin-bottom: 64px;
+    border-radius: 8px;
+    font-size: 16px;
+  }
+
+  .country-content {
+    grid-template-columns: 1fr;
+    gap: 44px;
+  }
+
+  .country-flag {
+    border-radius: 8px;
+    max-width: none;
+  }
+
+  .country-title {
+    font-size: 32px;
+    margin-bottom: 24px;
+    font-weight: 800;
+  }
+
+  .details-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    margin-bottom: 35px;
+  }
+
+  .details-left p,
+  .details-right p {
+    font-size: 16px;
+    margin-bottom: 12px;
+    line-height: 1.6;
+  }
+
+  .border-countries {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .border-countries .label {
+    font-size: 16px;
+    margin-top: 0;
+  }
+
+  .border-tags {
+    gap: 10px;
+  }
+
+  .border-tag {
+    padding: 8px 24px;
+    font-size: 14px;
+    border-radius: 4px;
+  }
+}

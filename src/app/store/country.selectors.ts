@@ -9,17 +9,26 @@ export const selectFilteredCountries = createSelector(
   selectedCountryState,
   (state) => {
     let filtered = state.countries;
+
+    // Search filter
     if (state.searchQuery) {
       const query = state.searchQuery.toLowerCase();
       filtered = filtered.filter((country) =>
         country.name.common.toLowerCase().includes(query)
       );
     }
+
+    // Region filter
     if (state.filterRegion) {
       filtered = filtered.filter(
         (country) => country.region === state.filterRegion
       );
     }
+
+    // Sort alphabetically
+    filtered = [...filtered].sort((a, b) =>
+      a.name.common.localeCompare(b.name.common)
+    );
     return filtered;
   }
 );

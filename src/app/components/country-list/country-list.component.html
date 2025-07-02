@@ -36,8 +36,11 @@
   <div *ngIf="error$ | async as error" class="error">{{ error }}</div>
 
   <div class="countries-grid">
-    @for(country of countries$ | async; track $index) {
-    <div class="country-card" (click)="selectCountry(country)">
+    <div
+      class="country-card"
+      (click)="selectCountry(country)"
+      *ngFor="let country of countries$ | async as countries; index as i"
+    >
       <div class="flag-container">
         <img
           [src]="country.flags.png"
@@ -60,6 +63,14 @@
         </div>
       </div>
     </div>
-    }
+  </div>
+</div>
+
+<div *ngIf="countries$ | async as countries">
+  <div *ngIf="countries.length === 0">No countries found</div>
+  <div class="countries-grid">
+    <div *ngFor="let country of countries">
+      {{ country.name.common }}
+    </div>
   </div>
 </div>

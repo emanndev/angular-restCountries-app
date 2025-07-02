@@ -21,7 +21,7 @@ import { PopulationPipe } from '../../pipes/population.pipe';
 @Component({
   selector: 'app-country-list',
   standalone: true,
-  imports: [CommonModule, FormsModule,  PopulationPipe],
+  imports: [CommonModule, FormsModule, PopulationPipe],
   templateUrl: './country-list.component.html',
   styleUrl: './country-list.component.scss',
 })
@@ -41,6 +41,10 @@ export class CountryListComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(loadCountries());
+
+    // Reset filters after load
+    this.store.dispatch(setSearchQuery({ query: '' }));
+    this.store.dispatch(setFilterRegion({ region: '' }));
   }
 
   onSearch() {

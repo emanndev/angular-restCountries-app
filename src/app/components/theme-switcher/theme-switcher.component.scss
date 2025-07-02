@@ -6,6 +6,9 @@
   background-color: var(--element-bg);
   box-shadow: var(--shadow);
   margin-bottom: 16px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .navbar-title {

@@ -11,12 +11,15 @@ export const countryReducer = createReducer(
     error: null,
   })),
 
-  on(CountryActions.loadCountriesSuccess, (state, { countries }) => ({
+on(CountryActions.loadCountriesSuccess, (state, { countries }) => {
+  console.log('Reducer updating state with:', countries);
+  return {
     ...state,
     countries,
     loading: false,
     error: null,
-  })),
+  };
+}),
 
   on(CountryActions.loadCountriesFailure, (state, { error }) => ({
     ...state,

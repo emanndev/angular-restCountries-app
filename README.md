@@ -68,8 +68,8 @@ ng serve
 
 ## Routes
 
-/countries  -	Main country list page
-/countries/:code  -  	Details page for selected country
+- /countries  -	Main country list page
+- /countries/:code  -  	Details page for selected country
 
 ## License
 

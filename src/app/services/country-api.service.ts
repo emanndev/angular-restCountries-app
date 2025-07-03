@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { map, catchError, tap } from 'rxjs/operators';
 import { Country } from '../models/country.interface';
 import { environment } from '../../environments/environment';
 
@@ -13,25 +13,30 @@ export class CountryApiService {
 
   constructor(private http: HttpClient) {}
   getAllCountries(): Observable<Country[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/independent?status=true`).pipe(
+    const fields =
+      'name,cca3,capital,region,population,flags,borders,subregion,tld,languages';
+
+    return this.http.get<any[]>(`${this.apiUrl}/all?fields=${fields}`).pipe(
       map((data) =>
-        data.map((item) => ({
-          name: {
-            common: item.name.common,
-            official: item.name.official,
-            nativeName: item.name.nativeName,
-          },
-          cca3: item.cca3,
-          capital: item.capital || [],
-          region: item.region,
-          population: item.population,
-          flags: item.flags,
-          borders: item.borders || [],
-          subregion: item.subregion,
-          tld: item.tld,
-          currencies: item.currencies,
-          languages: item.languages,
-        }))
+        data
+          .filter((item) => item.cca3 && item.name?.common)
+          .map((item) => ({
+            name: {
+              common: item.name.common,
+              official: item.name.official,
+              nativeName: item.name.nativeName,
+            },
+            cca3: item.cca3,
+            capital: item.capital || [],
+            region: item.region,
+            population: item.population,
+            flags: item.flags,
+            borders: item.borders || [],
+            subregion: item.subregion,
+            tld: item.tld,
+            currencies: item.currencies,
+            languages: item.languages,
+          }))
       ),
       catchError(this.handleError)
     );
@@ -64,8 +69,18 @@ export class CountryApiService {
     return this.http
       .get<any[]>(`${this.apiUrl}/alpha?codes=${codes.join(',')}`)
       .pipe(
-        map((data) =>
-          data.map((item) => ({
+        map((data) => {
+          const validData = data.filter(
+            (item) => item?.name?.common && item?.cca3
+          );
+          const invalidData = data.filter(
+            (item) => !item?.name?.common || !item?.cca3
+          );
+          if (invalidData.length) {
+            console.warn('Invalid country entries found:', invalidData);
+          }
+
+          return validData.map((item) => ({
             name: {
               common: item.name.common,
               official: item.name.official,
@@ -81,8 +96,8 @@ export class CountryApiService {
             tld: item.tld,
             currencies: item.currencies,
             languages: item.languages,
-          }))
-        ),
+          }));
+        }),
         catchError(this.handleError)
       );
   }

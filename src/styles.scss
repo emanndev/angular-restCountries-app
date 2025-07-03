@@ -1,10 +1,10 @@
-//use Nunito Sans font from Google Fonts
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&display=swap");
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Nunito Sans", sans-serif;
 }
 
 :root {
@@ -28,17 +28,5 @@ body {
   background-color: var(--bg-color);
   color: var(--text-color);
   min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
-
-// /* Loading and Error States */
-// .loading,
-// .error {
-//   text-align: center;
-//   padding: 20px;
-//   font-size: 18px;
-//   color: var(--text-color);
-// }
-
-// .error {
-//   color: #e74c3c;
-// }

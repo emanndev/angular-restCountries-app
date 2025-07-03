@@ -1,1 +1,31 @@
-<p>country-card works!</p>
+<div *ngIf="!(loading$ | async)">
+  <div class="countries-grid">
+    <div
+      class="country-card"
+      (click)="selectCountry(country)"
+      *ngFor="let country of countries$ | async as countries; index as i"
+    >
+      <div class="flag-container">
+        <img
+          [src]="country.flags.png"
+          [alt]="country.flags.alt"
+          class="flag-image"
+        />
+      </div>
+      <div class="country-info">
+        <h3 class="country-name">{{ country.name.common }}</h3>
+        <div class="country-details">
+          <p>
+            <span class="label">Population:</span>
+            {{ country.population | population }}
+          </p>
+          <p><span class="label">Region:</span> {{ country.region }}</p>
+          <p>
+            <span class="label">Capital:</span>
+            {{ country.capital.join(", ") || "N/A" }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

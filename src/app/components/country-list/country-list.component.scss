@@ -23,7 +23,7 @@
   left: 32px;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--input-color);
+  color: black;
   width: 18px;
   height: 18px;
 }
@@ -57,56 +57,68 @@
   min-width: 200px;
 }
 
-.countries-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(264px, 1fr));
-  gap: 75px;
-  padding-bottom: 48px;
+.loading-spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 0;
 }
 
-.country-card {
-  background-color: var(--element-bg);
-  border-radius: 5px;
-  box-shadow: var(--shadow);
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  overflow: hidden;
+.spinner {
+  width: 48px;
+  height: 48px;
+  border: 5px solid rgba(0, 0, 0, 0.1);
+  border-top-color: var(--text-color);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
 }
 
-.country-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-.flag-container {
-  width: 100%;
-  height: 160px;
-  overflow: hidden;
+@media (max-width: 1200px) {
+  .country-list-container,
+  .country-details-container {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  .country-content {
+    gap: 80px;
+  }
 }
 
-.flag-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+@media (max-width: 768px) {
+  .country-list-container,
+  .country-details-container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
 
-.country-info {
-  padding: 24px;
-}
+  .search-filter-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 32px;
+  }
 
-.country-name {
-  font-size: 18px;
-  font-weight: 800;
-  margin-bottom: 16px;
-  color: var(--text-color);
-}
+  .search-wrapper {
+    max-width: none;
+  }
 
-.country-details p {
-  font-size: 14px;
-  margin-bottom: 8px;
-  color: var(--text-color);
-}
+  .search-input {
+    padding: 16px 93px;
+    font-size: 14px;
+  }
 
-.label {
-  font-weight: 600;
+  .filter-select {
+    padding: 16px 20px;
+    width: 100%;
+    max-width: 200px;
+    width: 50%;
+    align-self: flex-start;
+  }
 }

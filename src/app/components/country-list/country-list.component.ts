@@ -15,13 +15,15 @@ import {
   selectFilteredCountries,
   selectError,
   selectLoading,
+  selectHasCountries,
 } from '../../store/country.selectors';
 import { PopulationPipe } from '../../pipes/population.pipe';
+import { CountryCardComponent } from '../country-card/country-card.component';
 
 @Component({
   selector: 'app-country-list',
   standalone: true,
-  imports: [CommonModule, FormsModule,  PopulationPipe],
+  imports: [CommonModule, FormsModule, CountryCardComponent],
   templateUrl: './country-list.component.html',
   styleUrl: './country-list.component.scss',
 })
@@ -40,7 +42,14 @@ export class CountryListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(loadCountries());
+    this.store.select(selectHasCountries).subscribe((hasCountries) => {
+      if (!hasCountries) {
+        this.store.dispatch(loadCountries());
+      }
+    });
+
+    this.store.dispatch(setSearchQuery({ query: '' }));
+    this.store.dispatch(setFilterRegion({ region: '' }));
   }
 
   onSearch() {
@@ -50,10 +59,5 @@ export class CountryListComponent implements OnInit {
   onFilterRegion(region: string) {
     this.filterRegion = region;
     this.store.dispatch(setFilterRegion({ region }));
-  }
-
-  selectCountry(country: Country) {
-    this.store.dispatch(selectCountry({ code: country.cca3 }));
-    this.router.navigate(['/countries', country.cca3]);
   }
 }

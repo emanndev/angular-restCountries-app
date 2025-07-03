@@ -55,14 +55,14 @@ The application uses NgRx to manage:
 
 ## Clone the repo
 
-git clone (https://github.com/emanndev/angular-restCountries-app.git)
-cd rest-countries-angular
+- git clone (https://github.com/emanndev/angular-restCountries-app.git)
+- cd rest-countries-angular
 
-## Install dependencies
+### Install dependencies
 
 npm install
 
-## Run the app
+### Run the app
 
 ng serve
 

@@ -36,6 +36,11 @@
       <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
       <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
     </svg>
-    <span class="theme-text">Dark Mode</span>
+    <span class="theme-text" *ngIf="(theme$ | async) === 'dark'; else darkMode"
+      >Light mode</span
+    >
+    <ng-template #darkMode>
+      <span class="theme-text">Dark mode</span>
+    </ng-template>
   </button>
 </nav>

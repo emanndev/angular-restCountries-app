@@ -1,31 +1,43 @@
-<div *ngIf="!(loading$ | async)">
-  <div class="countries-grid">
-    <div
-      class="country-card"
-      (click)="selectCountry(country)"
-      *ngFor="let country of countries$ | async as countries; index as i"
-    >
-      <div class="flag-container">
-        <img
-          [src]="country.flags.png"
-          [alt]="country.flags.alt"
-          class="flag-image"
-        />
-      </div>
-      <div class="country-info">
-        <h3 class="country-name">{{ country.name.common }}</h3>
-        <div class="country-details">
-          <p>
-            <span class="label">Population:</span>
-            {{ country.population | population }}
-          </p>
-          <p><span class="label">Region:</span> {{ country.region }}</p>
-          <p>
-            <span class="label">Capital:</span>
-            {{ country.capital.join(", ") || "N/A" }}
-          </p>
+<div class="country-list-wrapper">
+  <div *ngIf="loading$ | async" class="loading-spinner-container">
+    <div class="spinner"></div>
+  </div>
+
+  <ng-container *ngIf="!(loading$ | async)">
+    <div *ngIf="(countries$ | async)?.length === 0" class="no-results">
+      <p>No countries found matching your search.</p>
+      <img class="world-map-img" src="/assets/globe.png" alt="world-map" />
+    </div>
+
+    <div class="countries-grid" *ngIf="((countries$ | async)?.length ?? 0) > 0">
+      <div
+        class="country-card"
+        *ngFor="let country of countries$ | async"
+        (click)="selectCountry(country)"
+      >
+        <!-- Card content -->
+        <div class="flag-container">
+          <img
+            [src]="country.flags.png"
+            [alt]="country.flags.alt"
+            class="flag-image"
+          />
+        </div>
+        <div class="country-info">
+          <h3 class="country-name">{{ country.name.common }}</h3>
+          <div class="country-details">
+            <p>
+              <span class="label">Population:</span>
+              {{ country.population | population }}
+            </p>
+            <p><span class="label">Region:</span> {{ country.region }}</p>
+            <p>
+              <span class="label">Capital:</span>
+              {{ country.capital.join(", ") || "N/A" }}
+            </p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </ng-container>
 </div>

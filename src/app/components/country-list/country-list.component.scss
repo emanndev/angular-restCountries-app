@@ -23,7 +23,7 @@
   left: 32px;
   top: 50%;
   transform: translateY(-50%);
-  color: black;
+  color: var(--input-color);
   width: 18px;
   height: 18px;
 }
@@ -45,7 +45,7 @@
 }
 
 .filter-select {
-  padding: 18px 24px;
+  padding: 18px 20px;
   border: none;
   border-radius: 5px;
   background-color: var(--element-bg);

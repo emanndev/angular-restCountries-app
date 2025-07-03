@@ -16,7 +16,7 @@ export class CountryApiService {
     const fields =
       'name,cca3,capital,region,population,flags,borders,subregion,tld,languages';
 
-    return this.http.get<any[]>(`${this.apiUrl}/all?fields=${fields}`).pipe(
+    return this.http.get<Country[]>(`${this.apiUrl}/all?fields=${fields}`).pipe(
       map((data) =>
         data
           .filter((item) => item.cca3 && item.name?.common)

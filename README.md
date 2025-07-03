@@ -1,59 +1,77 @@
-# AngularRestCountriesApp
+# REST Countries Angular App
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.14.
+This is a fully functional Angular 17+ application that consumes the [REST Countries API](https://restcountries.com/) to display detailed information about countries around the world. It includes search, filtering, dark/light theme toggle, and country details with clickable border navigation — all powered by **NgRx** for state management.
 
-## Development server
+## Features
 
-To start a local development server, run:
+- Display a list of countries
+- Search for countries by name
+- Filter countries by region
+- Toggle between Light and Dark themes
+- Click on a country to view its details
+- View and navigate to border countries
+- Global loading spinner for data fetching
+- Fully responsive design
 
-```bash
+## Tech Stack
+
+| Technology            | Use Case              |
+| --------------------- | --------------------- |
+| Angular 17            | Application framework |
+| Angular Router        | Routing               |
+| NgRx (Store, Effects) | State management      |
+| RxJS                  | Reactive streams      |
+| SCSS                  | Styling and theming   |
+| REST Countries API    | External data source  |
+
+## Folder Structure
+
+src/
+├── app/
+│   ├── components/         # Standalone components
+│   ├── models/             # Interfaces (Country)
+│   ├── pipes/              # Custom pipes (population, object list)
+│   ├── services/           # API service
+│   ├── store/              # NgRx state files
+│   ├── app.routes.ts       # App routing config
+│   └── app.component.ts    # Root component
+│   └── app.component.html    # Root component
+
+## State Management with NgRx
+
+The application uses NgRx to manage:
+
+- All country data
+
+- Selected country
+
+- Search query & region filter
+
+- Theme (light or dark)
+
+- Loading and error state
+
+- Actions/Reducers/Selectors are organized in src/app/store.
+
+## Clone the repo
+
+git clone https://github.com/your-username/rest-countries-angular.git
+cd rest-countries-angular
+
+## Install dependencies
+
+npm install
+
+## Run the app
+
 ng serve
-```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Routes
 
-## Code scaffolding
+/countries  -	Main country list page
+/countries/:code  -  	Details page for selected country
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## License
 
-```bash
-ng generate component component-name
-```
+no commercial license applied.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.

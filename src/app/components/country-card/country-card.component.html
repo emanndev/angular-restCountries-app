@@ -1,0 +1,32 @@
+<div class="country-list-wrapper">
+  <div class="countries-grid" *ngIf="((countries$ | async)?.length ?? 0) > 0">
+    <div
+      class="country-card"
+      *ngFor="let country of countries$ | async"
+      (click)="selectCountry(country)"
+    >
+      <!-- Card content -->
+      <div class="flag-container">
+        <img
+          [src]="country.flags.png"
+          [alt]="country.flags.alt"
+          class="flag-image"
+        />
+      </div>
+      <div class="country-info">
+        <h3 class="country-name">{{ country.name.common }}</h3>
+        <div class="country-details">
+          <p>
+            <span class="label">Population:</span>
+            {{ country.population | population }}
+          </p>
+          <p><span class="label">Region:</span> {{ country.region }}</p>
+          <p>
+            <span class="label">Capital:</span>
+            {{ country.capital.join(", ") || "N/A" }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

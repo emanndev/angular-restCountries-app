@@ -1,1 +1,32 @@
-/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Nunito Sans", sans-serif;
+}
+
+:root {
+  --bg-color: #fafafa;
+  --element-bg: #ffffff;
+  --text-color: #111517;
+  --input-color: #858585;
+  --shadow: 0 2px 9px rgba(0, 0, 0, 0.05);
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+  --bg-color: #202c37;
+  --element-bg: #2b3945;
+  --text-color: #ffffff;
+  --input-color: #ffffff;
+  --shadow: 0 2px 9px rgba(0, 0, 0, 0.3);
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}

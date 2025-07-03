@@ -1,0 +1,124 @@
+.country-list-container {
+  padding: 0 80px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.search-filter-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 48px;
+  gap: 20px;
+}
+
+.search-wrapper {
+  position: relative;
+  flex: 1;
+  max-width: 480px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 32px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--input-color);
+  width: 18px;
+  height: 18px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 18px 32px 18px 74px;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--element-bg);
+  color: var(--text-color);
+  font-size: 14px;
+  box-shadow: var(--shadow);
+  outline: none;
+}
+
+.search-input::placeholder {
+  color: var(--input-color);
+}
+
+.filter-select {
+  padding: 18px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--element-bg);
+  color: var(--text-color);
+  font-size: 14px;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  outline: none;
+  min-width: 200px;
+}
+
+.loading-spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 0;
+}
+
+.spinner {
+  width: 48px;
+  height: 48px;
+  border: 5px solid rgba(0, 0, 0, 0.1);
+  border-top-color: var(--text-color);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 1200px) {
+  .country-list-container,
+  .country-details-container {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  .country-content {
+    gap: 80px;
+  }
+}
+
+@media (max-width: 768px) {
+  .country-list-container,
+  .country-details-container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .search-filter-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 32px;
+  }
+
+  .search-wrapper {
+    max-width: none;
+  }
+
+  .search-input {
+    padding: 16px 93px;
+    font-size: 14px;
+  }
+
+  .filter-select {
+    padding: 16px 20px;
+    width: 100%;
+    max-width: 200px;
+    width: 50%;
+    align-self: flex-start;
+  }
+}

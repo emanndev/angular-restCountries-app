@@ -87,9 +87,47 @@
 
 .no-results {
   text-align: center;
-  margin-top: 40px;
-  font-size: 18px;
-  font-weight: 600;
+  padding: 40px 0;
   color: var(--text-color);
-  opacity: 0.7;
+  animation: fadeIn 10s ease-in-out;
+
+  p {
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .world-map-img {
+    margin-top: 5px;
+    width: 50%;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 10s ease-in-out;
+}
+
+.scale-in {
+  animation: scaleIn 3.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }

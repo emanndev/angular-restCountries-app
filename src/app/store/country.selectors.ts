@@ -4,7 +4,6 @@ import { CountryState } from './country.state';
 export const selectedCountryState =
   createFeatureSelector<CountryState>('country');
 
-// This selector returns the list of countries from the state
 export const selectFilteredCountries = createSelector(
   selectedCountryState,
   (state) => {
